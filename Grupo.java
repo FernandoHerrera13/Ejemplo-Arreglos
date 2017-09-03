@@ -2,15 +2,17 @@ public class Grupo
 {
     private String nombreMateria;
     private Estudiante[] estudiantes;
-    public Grupo(int totalEstudiantes, String nomMateria)
+    
+    public Grupo(int totalEstudiantes, String nombreMateria)
     {
         estudiantes = new Estudiante[totalEstudiantes];
-        this.nombreMateria=nomMateria;
+        this.nombreMateria=nombreMateria;
     }
-        /**
-     * Busca un estudiante por medio de su clave.
-     * @param claveEstudiante.
-     * @retunr Regresa la posicion del estudiante en el arreglo o -1 si no existe.
+    
+     /**
+     * Ayuda a buscar a  un estudiante por su clave.
+     * @param clave
+     * @retunr Regresa la posicion del estudiante en el arreglo o -1 si no existe
      */
     public int buscarEstudiante(int clave)
     {
@@ -23,9 +25,10 @@ public class Grupo
         }
         return -1;
     }
+    
     /**
      * Busca un espacio disponible en el arreglo
-     * @return Regresa la poscion nula dentro del arreglo
+     * @return Regresa la poscion nula dentro del arreglo y sino encontro espacio regresa el valor de -1
      */
     private int buscaEspacioDisponible()
     {
@@ -38,39 +41,39 @@ public class Grupo
         }
         return -1;
     }
+    
     /**
-     * Inscribe un estudiante nuevo del grupo.
-     * @param unEstudiante Es el objeto estuduante a inscribir en el grupo.
-     * @return Regresa verdadero si el estudiante fue inscrito o falso en caso de que
-     *         no se pudiera inscribir.
+     * Inscribe a un estudiante
+     * @param unEstudiante 
+     * @return Regresa verdadero si el estudiante fue inscrito o falso en caso de que no
      */
     public boolean inscribir(Estudiante unEstudiante)
     {
         int existe = this.buscarEstudiante(unEstudiante.dimeClave());
         if(existe ==-1)
         {
-            return false;//Existe el estudiante inscrito
+            return false;
         }
         int posDisponible = this.buscaEspacioDisponible();
         if(posDisponible == -1)
         {
-            return false;//No existe espacio disponible
+            return false;
         }
-        estudiantes[posDisponible]=unEstudiante;//el estudiante fue inscrito
+        estudiantes[posDisponible]=unEstudiante;
         return true;
     }
+    
     /**
-     * Inscribe un estudiante nuevo del grupo.
-     * @param claveUnica Es la del estudiante a dar de baja en el grupo.
-     * @return Regresa verdadero si el estudiante fue dado de baja o falso en caso de que
-     *         no se pudiera dar de baja por que no existe.
+     * Da de baja a un estudiante del grupo.
+     * @param claveUnica 
+     * @return Regresa verdadero si el estudiante fue dado de baja o falso en caso de que no
      */
     public boolean baja(int claveUnica)
     {
         int existe = this.buscarEstudiante(claveUnica);
         if(existe ==-1)
         {
-            return false;//No existe el estudiante inscrito
+            return false;
         }
         this.estudiantes[existe] = null;
         return true;
